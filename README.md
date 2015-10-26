@@ -18,7 +18,7 @@ To serve the application with the built-in debug server, run
 $ npm start
 ```
 
-Navigate to http://localhost:8001/ to play with the demo application.
+Navigate to [http://localhost:8001/](http://localhost:8001/) to play with the demo application.
 
 ## Developing
 
@@ -38,10 +38,17 @@ When you change the configuration, run `npm intall` to rebuild OpenLayers before
 
 ## Building the app for distribution
 
-The application you see in the browser at http://loalhost:8001/ uses unminified JavaScript with source maps for easy debugging. To build the application for distribution, you will want minified JavaScript and no files that do not belong to the app, like this `README.md` file you're reading. When you are satisfied with your application, run
+The application you see in the browser at [http://localhost:8001/](http://localhost:8001/) uses unminified JavaScript with source maps for easy debugging, and loads all OpenLayers source files separately. To build the application for distribution, you will want minified JavaScript and no files that do not belong to the app, like this `README.md` file you're reading. When you are satisfied with your application, run
 
 ```
+$ npm install
 $ npm run dist
 ```
 
-This will populate the `dist/` directory with only the files that belong to your application. You can grab the contents of that directory and deploy it to your server.
+This will populate the `dist/` directory with only the files that belong to your application. To test the result, run
+
+```
+$ npm start
+```
+
+and navigate to [http://localhost:8001/dist/](http://localhost:8001/dist/). If you get JavaScript errors, you have not included all OpenLayers symbols or features that your app uses in `config/ol.json`. Review the `exports` and `compile`-`define` sections to include missing symbols and features, and go through the "Building the app for distribution" steps again. When everything works, you can grab the contents of the `dist/` directory and deploy it to your server.

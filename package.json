@@ -4,11 +4,9 @@
   "description": "Basic app template for OpenLayers applications in an npm and CommonJS environment",
   "main": "dist/index.js",
   "scripts": {
-    "start": "npm run debug-js & npm run serve",
+    "start": "node util/debug.js",
     "postinstall": "node node_modules/openlayers/tasks/build.js config/ol.json node_modules/openlayers/dist/ol.js",
-    "debug-js": "browserify src/index.js -d -t -g cssify -o index.js",
     "minify-js": "browserify src/index.js -t -g cssify | uglifyjs > dist/index.js",
-    "serve": "node util/debug.js",
     "dist": "npm run minify-js && cp -Rf *.html dist/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -33,6 +31,7 @@
     "browserify": "^9.0.3",
     "uglify-js": "^2.4.23",
     "cssify": "^0.7.0",
-    "ecstatic": "^0.7.6"
+    "ecstatic": "^0.7.6",
+    "through": "^2.3.8"
   }
 }
