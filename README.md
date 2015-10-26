@@ -24,7 +24,7 @@ Navigate to [http://localhost:8001/](http://localhost:8001/) to play with the de
 
 ### App structure
 
-The entry points for your application are `src/index.js`, `src/index.css` and `index.html`. Your html files go in the root directory, JavaScript and css files go in the `src/` directory. CSS is included in the built JavaScript file with [cssify](https://www.npmjs.com/package/cssify), so no CSS should be included in your html files.
+The entry points for your application are `src/index.js`, `src/index.css` and `index.html`. Your html files go in the root directory, JavaScript and css files go in the `src/` directory, and additional static resources (e.g. images) go into `static/`. CSS is included in the built JavaScript file with [cssify](https://www.npmjs.com/package/cssify), so no CSS should be included in your html files.
 
 ### Testing changes
 
