@@ -1,0 +1,14 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+    "require": true
+  },
+  "rules": {
+    "quotes": [2, "single"],
+    "yoda": [2, "never", {"exceptRange": true, "onlyEquality": true}],
+    "strict": 0
+  }
+}
