@@ -29,9 +29,9 @@
     "openlayers": "^3.10.1"
   },
   "devDependencies": {
-    "browserify": "^9.0.3",
-    "watchify": "^2.4.0",
-    "uglify-js": "^2.4.23",
+    "browserify": "^12.0.1",
+    "watchify": "^3.6.0",
+    "uglify-js": "^2.5.0",
     "cssify": "^0.7.0"
   }
 }
