@@ -20,6 +20,8 @@ $ npm start
 
 Navigate to [http://localhost:3000/](http://localhost:3000/) to play with the demo application.
 
+To run the debug server on a different port, use the `$PORT` environment variable.
+
 ## Developing
 
 ### App structure

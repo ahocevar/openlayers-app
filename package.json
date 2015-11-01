@@ -7,7 +7,7 @@
     "start": "watchify src/index.js -d -t -g cssify -o _index.js & npm run serve",
     "postinstall": "node node_modules/openlayers/tasks/build.js config/ol.json node_modules/openlayers/dist/ol.js",
     "minify-js": "browserify src/index.js -t -g cssify | uglifyjs > dist/index.js",
-    "serve": "node node_modules/openlayers/tasks/serve-lib.js",
+    "serve": "node node_modules/openlayers/tasks/serve-lib.js --port=${PORT:-3000}",
     "dist": "npm run minify-js && cp -Rf static *.html dist/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
