@@ -8,6 +8,7 @@
     "ol.source.OSM"
   ],
   "umd": true,
+  "jvm": [],
   "compile": {
     "externs": [
       "externs/bingmaps.js",
