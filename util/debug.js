@@ -3,6 +3,7 @@ var cssify = require('cssify');
 var watchify = require('watchify');
 var through = require('through');
 var fs = require('fs');
+var path = require('path');
 var cp = require('child_process');
 
 function globalOl(file) {
@@ -23,11 +24,24 @@ var b = browserify({
   packageCache: {}
 }).transform(globalOl).transform(cssify, {global: true});
 
-function bundle() {
-  b.bundle().pipe(fs.createWriteStream('./_index.js'));
-}
+b.on('update', function bundle(onError) {
+  var stream = b.bundle();
+  if (onError) {
+    stream.on('error', function(err) {
+      console.log(err.message);
+      process.exit(1);
+    });
+  }
+  stream.pipe(fs.createWriteStream('./_index.js'));
+});
 
-b.on('update', bundle);
-bundle();
-
-cp.fork('./node_modules/openlayers/tasks/serve-lib.js', []);
+b.bundle(function(err, buf) {
+  if (err) {
+    console.error(err.message);
+    process.exit(1);
+  } else {
+    fs.writeFile('./_index.js', buf, 'utf-8');
+    cp.fork(path.join(path.dirname(require.resolve('openlayers')),
+        '../tasks/serve-lib.js'), []);
+  }
+});
