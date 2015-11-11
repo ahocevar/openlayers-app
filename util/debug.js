@@ -24,15 +24,8 @@ var b = browserify({
   packageCache: {}
 }).transform(globalOl).transform(cssify, {global: true});
 
-b.on('update', function bundle(onError) {
-  var stream = b.bundle();
-  if (onError) {
-    stream.on('error', function(err) {
-      console.log(err.message);
-      process.exit(1);
-    });
-  }
-  stream.pipe(fs.createWriteStream('./_index.js'));
+b.on('update', function() {
+  b.bundle().pipe(fs.createWriteStream('./_index.js'));
 });
 
 b.bundle(function(err, buf) {
