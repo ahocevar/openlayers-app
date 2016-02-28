@@ -24,8 +24,19 @@ var b = browserify({
   packageCache: {}
 }).transform(globalOl).transform(cssify, {global: true});
 
-b.on('update', function() {
-  b.bundle().pipe(fs.createWriteStream('./_index.js'));
+var outFile = './_index.js';
+var childProcess;
+
+b.on('update', function bundle(onError) {
+  var stream = b.bundle();
+  if (onError) {
+    stream.on('error', function(err) {
+      console.log(err.message);
+      childProcess.kill('SIGINT');
+      process.exit(1);
+    });
+  }
+  stream.pipe(fs.createWriteStream(outFile));
 });
 
 b.bundle(function(err, buf) {
@@ -33,8 +44,8 @@ b.bundle(function(err, buf) {
     console.error(err.message);
     process.exit(1);
   } else {
-    fs.writeFile('./_index.js', buf, 'utf-8');
-    cp.fork(path.join(path.dirname(require.resolve('openlayers')),
+    fs.writeFile(outFile, buf, 'utf-8');
+    childProcess = cp.fork(path.join(path.dirname(require.resolve('openlayers')),
         '../tasks/serve-lib.js'), []);
   }
 });
