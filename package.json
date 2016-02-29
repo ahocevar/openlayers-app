@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node util/debug.js",
     "postinstall": "node node_modules/openlayers/tasks/build.js config/ol.json node_modules/openlayers/dist/ol.js",
-    "minify-js": "browserify src/index.js -t -g cssify | uglifyjs > dist/index.js",
+    "minify-js": "browserify src/index.js | uglifyjs > dist/index.js",
     "dist": "npm run minify-js && cp -Rf static *.html dist/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -33,5 +33,10 @@
     "uglify-js": "^2.5.0",
     "cssify": "^0.7.0",
     "through": "^2.3.8"
+  },
+  "browserify": {
+    "transform": [
+      "cssify"
+    ]
   }
 }

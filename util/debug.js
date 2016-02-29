@@ -22,7 +22,7 @@ var b = browserify({
   plugin: [watchify],
   cache: {},
   packageCache: {}
-}).transform(globalOl).transform(cssify, {global: true});
+}).transform(globalOl);
 
 var outFile = './_index.js';
 var childProcess;
